@@ -1,8 +1,6 @@
 from typing import Optional
 
-from pydantic import BaseModel, EmailStr, Field, PositiveInt, conint
-
-from db import constants
+from pydantic import BaseModel, EmailStr, PositiveInt
 
 
 class User(BaseModel):

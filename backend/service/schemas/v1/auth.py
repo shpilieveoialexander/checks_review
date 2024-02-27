@@ -1,9 +1,8 @@
 from fastapi import Form
 from fastapi.exceptions import ValidationException
-from pydantic import EmailStr, PositiveInt
+from pydantic import EmailStr
 
 from db import constants
-from service.core.security import validate_tmp_token
 
 
 class Auth:
@@ -35,5 +34,3 @@ class SignUp(Auth):
         super().__init__(email, password)
         self.name = name
         self.password_confirm = password_confirm
-
-

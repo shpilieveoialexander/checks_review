@@ -32,4 +32,3 @@ class UserMeTestCase(TestCase):
         resp_data = response.json()
         assert response.status_code == status.HTTP_403_FORBIDDEN
         assert resp_data["detail"] == "Could not validate credentials"
-

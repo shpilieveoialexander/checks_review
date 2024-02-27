@@ -1,6 +1,5 @@
 from fastapi import Depends, HTTPException, status
 from jose import jwt
-from pydantic import PositiveInt
 
 from db import constants, models
 from db.session import DBSession
@@ -75,6 +74,3 @@ async def get_current_user(
             detail="Could not validate credentials",
         )
     return user
-
-
-

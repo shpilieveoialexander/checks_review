@@ -2,7 +2,7 @@ import random
 
 from fastapi import status
 
-from service.core.security import create_tmp_token, hash_password
+from service.core.security import hash_password
 from tests import factories
 from tests.conftests import TestCase
 from tests.factories.utils import fake
