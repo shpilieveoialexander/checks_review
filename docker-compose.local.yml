@@ -1,0 +1,80 @@
+# Compose file for developing
+version: "3"
+
+services:
+  nginx:
+    image: nginx:latest
+    container_name: checks_review_nginx
+    volumes:
+      - ./nginx:/etc/nginx/conf.d
+    ports:
+      - 80:80
+    depends_on:
+      - backend
+    networks:
+      - checks_review_net
+    restart: always
+
+
+  db:
+    image: postgres:latest
+    container_name: checks_review_db
+    volumes:
+      - db:/var/lib/postgresql/data
+    env_file:
+      - local.env
+    environment:
+      - POSTGRES_DB=$PSQL_DB_NAME
+      - POSTGRES_USER=$PSQL_USER
+      - POSTGRES_PASSWORD=$PSQL_PASSWORD
+    networks:
+      - checks_review_net
+
+
+  backend:
+    build: ./backend/
+    container_name: checks_review_backend
+    volumes:
+      - db:/var/lib/postgresql/data
+      - ./backend/:/backend/
+    env_file:
+      - local.env
+    depends_on:
+      - db
+    networks:
+      - checks_review_net
+    ports:
+      - ${BACKEND_PORT}:${BACKEND_PORT}
+
+
+  redis:
+    image: redis:latest
+    container_name: checks_review_redis
+    command: redis-server
+    env_file:
+      - local.env
+    networks:
+      - checks_review_net
+    ports:
+      - ${REDIS_PORT}:${REDIS_PORT}
+
+
+  adminer:
+    image: adminer:latest
+    container_name: checks_review_adminer
+    env_file:
+      - local.env
+    depends_on:
+      - db
+    networks:
+      - checks_review_net
+    ports:
+      - ${ADMINER_PORT}:${ADMINER_PORT}
+
+
+
+networks:
+  checks_review_net:
+
+volumes:
+  db:
