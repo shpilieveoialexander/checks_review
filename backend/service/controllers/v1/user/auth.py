@@ -120,9 +120,7 @@ async def refresh_token(
     `404` NOT_FOUND - User is inactive or not found\n
     """
     # Checking existing user
-    exists_query = models.User.exists(
-        id=token_data.pk
-    )
+    exists_query = models.User.exists(id=token_data.pk)
     with session() as db:
         user_exists = db.execute(exists_query).scalar()
 
@@ -144,4 +142,3 @@ async def refresh_token(
             "refresh_token_lifetime": settings.JWT_REFRESH_TOKEN_EXPIRE_MINUTES,
         },
     )
-

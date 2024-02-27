@@ -1,7 +1,4 @@
-from sqlalchemy import (VARCHAR, Boolean, CheckConstraint, Column, ForeignKey,
-                        Integer, String)
-
-from db import constants
+from sqlalchemy import Column, String
 
 from .base import BaseModel
 

@@ -2,7 +2,7 @@ import os
 from typing import Any, Final, List, Optional
 
 import ujson
-from pydantic import AnyHttpUrl, ConfigDict, EmailStr, field_validator
+from pydantic import AnyHttpUrl, ConfigDict, field_validator
 from pydantic_settings import BaseSettings
 
 
